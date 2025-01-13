@@ -63,14 +63,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({...store, listaDeContactos: [...store.listaDeContactos, contact]})
 			},
-			crearContacto: (dataContact) => {
+			crearContacto: (dataContacto) => {
                 fetch("https://playground.4geeks.com/contact/agendas/martopravia/contacts", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(
-                        dataContact
+                        dataContacto
                     ),
                 })
                     .then((response) => response.json())

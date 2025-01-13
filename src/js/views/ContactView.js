@@ -5,7 +5,6 @@ import IndividualContact from "../component/IndividualContact.js";
 
 const ContactView = () => {
   const { store, actions } = useContext(Context);
- 
 
   useEffect(() => {
     actions.obtenerContactos();
@@ -17,7 +16,7 @@ const ContactView = () => {
         <div className="row justify-content-center">
           <div className="col-lg-8 col-md-10">
             <div className="text-end my-2">
-              <Link to="/form" type="button" class="btn btn-success">
+              <Link to="/addContact" type="button" className="btn btn-success">
                 Agregar Contacto
               </Link>
             </div>

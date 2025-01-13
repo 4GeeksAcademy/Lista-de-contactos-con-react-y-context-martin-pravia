@@ -12,16 +12,28 @@ const AddContactForm = () => {
   const[phone, setPhone] = useState("");
   const[address, setAddress] = useState("");
 
-  function guardarInfo(e) {
-    e.preventDefault()
-  }
-
-  const dataContact = {
-    name: name,
-    phone: phone,
-    email: email,
-    address: address
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    if (!name || !address || !phone || !email) {
+      alert("Por favor completa todos los campos.");
+      return;
+    }
+  
+    const dataContacto = {
+      name,
+      phone,
+      email,
+      address,
+    };
+  
+    actions.crearContacto(dataContacto); 
+    alert("Contacto creado exitosamente.");
+    navigate('/'); 
+    setName("");
+    setEmail("");
+    setPhone("");
+    setAddress("");
+  };
 
 
   return (
@@ -32,8 +44,10 @@ const AddContactForm = () => {
             <h1> Add a new Contact</h1>
           </div>
         </div>
+        
         <div className="row justify-content-center align-items-center">
           <div className="col-6 ">
+          <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="inputName" className="form-label">
                 Nombre Completo
@@ -43,6 +57,9 @@ const AddContactForm = () => {
                 className="form-control"
                 id="inputName"
                 placeholder="Ingrese su nombre completo..."
+                onChange={(e) => setName(e.target.value)} 
+                value={name} 
+                required
               />
             </div>
             <div className="mb-3">
@@ -54,6 +71,9 @@ const AddContactForm = () => {
                 className="form-control"
                 id="InputDireccion"
                 placeholder="Ingrese su dirección..."
+                onChange={(e) => setAddress(e.target.value)} 
+                value={address} 
+                required
               />
             </div>
             <div className="mb-3">
@@ -65,6 +85,9 @@ const AddContactForm = () => {
                 className="form-control"
                 id="inputPhone"
                 placeholder="Ingrese su Teléfono..."
+                onChange={(e) => setPhone(e.target.value)} 
+                value={phone} 
+                required
               />
             </div>
             <div className="mb-3">
@@ -76,6 +99,9 @@ const AddContactForm = () => {
                 className="form-control"
                 id="inputEmail"
                 placeholder="Ingrese su Email..."
+                onChange={(e) => setEmail(e.target.value)} 
+                value={email} 
+                required
               />
               </div>
               <div className="my-3">
@@ -83,6 +109,7 @@ const AddContactForm = () => {
                   Enviar
                 </button>
               </div>
+              </form>
 
               <div className="mb-3">
                 <Link to="/">Volver a la lista de contactos</Link>
