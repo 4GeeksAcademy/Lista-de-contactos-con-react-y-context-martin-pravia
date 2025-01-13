@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			listaDeContactos: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,7 +38,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			obtenerContactos: () => {
+				fetch("https://playground.4geeks.com/contact/agendas/martopravia/contacts", {
+					method: "GET"
+					
+				})
+				.then ((response) => {
+					if(!response.ok) {
+						throw new Error ("Error en la obtencion de los datos del contacto")
+					}
+					return response.json()
+				})
+				.then ((data) => {
+					if (data) {
+						setStore({listaDeContactos: data.contacts})
+					}
+				})
+				.catch((error) => {
+					console.log("Ocurrió un error: ", error )
+				})
 			}
+
 		}
 	};
 };
