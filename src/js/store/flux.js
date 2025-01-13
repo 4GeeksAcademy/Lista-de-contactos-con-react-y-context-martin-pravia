@@ -90,8 +90,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                         console.log(response)
                         if (response.ok) {
                             const store = getStore();
-                            const contactoActualizado = store.listContacts.filter(contact => contact.id !== id);
-                            setStore({ listContacts: contactoActualizado });
+                            const contactoActualizado = store.listaDeContactos.filter(contact => contact.id !== id);
+                            setStore({ listaDeContactos: contactoActualizado });
                             console.log(`Contacto con id:  ${id} Ha sido eliminado`);
                         } else {
                             console.log("Error borrando el contacto");
@@ -99,35 +99,23 @@ const getState = ({ getStore, getActions, setStore }) => {
                     })
                     .catch((error) => console.log(error));
             }, 
-			editarContacto: (id, contact) => {
-                const store = getStore()
-                fetch(`https://playground.4geeks.com/contact/agendas/martopravia/contacts/${id}`, {
-                    method: "PUT",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(contact)
-                })
-                    .then((response) => {
-                        if (response.ok) {
-                            return response.json()
-                        }
-                    })
-                    .then((data) => {
-                        if (data) {
-                            const contactoModificado = store.listaDeContactos.map(contact => {
-                                if (contact.id == id) {
-                                    contact = data
-                                }
-                                return contact
-                            })
-                            setStore({ listaDeContactos: contactoModificado })
-                        }
-                    })
-                    .catch((error) => console.log(error));
-
-
-            }
+			editarContacto: (id, contactoActualizado) => {
+				fetch(`https://playground.4geeks.com/contact/agendas/martopravia/contacts/${id}`, {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(contactoActualizado),
+				})
+					.then((response) => response.json())
+					.then((data) => {
+						const store = getStore();
+						const contactosActualizados = store.listaDeContactos.map(contact => 
+							contact.id === id ? { ...contact, ...data } : contact
+						);
+						setStore({ listaDeContactos: contactosActualizados });
+						console.log(`Contacto con id ${id} actualizado.`);
+					})
+					.catch((error) => console.error("Error al editar el contacto:", error));
+			},
 
 
 		}

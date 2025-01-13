@@ -26,8 +26,15 @@ const AddContactForm = () => {
       address,
     };
   
+  
+    if (!id) {
     actions.crearContacto(dataContacto); 
     alert("Contacto creado exitosamente.");
+   
+    } else {
+      actions.editarContacto(id, dataContacto)
+      alert("Contacto modificado exitosamente.");
+    }
     navigate('/'); 
     setName("");
     setEmail("");
