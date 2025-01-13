@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AddContactForm = () => {
   return (
@@ -12,48 +13,57 @@ const AddContactForm = () => {
         <div className="row justify-content-center align-items-center">
           <div className="col-6 ">
             <div className="mb-3">
-              <label htmlFor="formGroupExampleInput" className="form-label">
+              <label htmlFor="inputName" className="form-label">
                 Nombre
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput"
-                placeholder="Example input placeholder"
+                id="inputName"
+                placeholder="Ingrese su nombre..."
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="formGroupExampleInput2" className="form-label">
+              <label htmlFor="inputLastname..." className="form-label">
                 Apellido
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput2"
-                placeholder="Another input placeholder"
+                id="inputLastname"
+                placeholder="Ingrese su apellido..."
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="formGroupExampleInput" className="form-label">
+              <label htmlFor="inputEmail" className="form-label">
                 Email
               </label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
-                id="formGroupExampleInput"
-                placeholder="Example input placeholder"
+                id="inputEmail"
+                placeholder="Ingrese su Email..."
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="formGroupExampleInput" className="form-label">
+              <label htmlFor="inputDireccion" className="form-label">
                 Dirección
               </label>
               <input
                 type="text"
                 className="form-control"
-                id="formGroupExampleInput"
-                placeholder="Example input placeholder"
+                id="InputDireccion"
+                placeholder="Ingrese su dirección..."
               />
+              <div className="my-3">
+                <button type="submit" class="btn btn-primary mb-3">
+                  Enviar
+                </button>
+              </div>
+
+              <div className="mb-3">
+                <Link to="/">Volver a la lista de contactos</Link>
+              </div>
             </div>
           </div>
         </div>
