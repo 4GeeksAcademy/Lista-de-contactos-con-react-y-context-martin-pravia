@@ -19,7 +19,8 @@ const Layout = () => {
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<ContactView />} />
-            <Route path="/form" element={<AddContactForm />} />
+            <Route path="/addContact" element={<AddContactForm />} />
+            <Route path="/editContact" element={<AddContactForm />} />
 
             <Route path="*" element={<h1>Not found!</h1>} />
           </Routes>

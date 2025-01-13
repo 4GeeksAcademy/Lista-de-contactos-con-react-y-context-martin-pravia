@@ -1,7 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 const AddContactForm = () => {
+  const {store, actions} = useContext(Context)
+  const {id} = useParams()
+  let navigate = useNavigate()
+
+  const[name, setName] = useState("");
+  const[email, setEmail] = useState("");
+  const[phone, setPhone] = useState("");
+  const[address, setAddress] = useState("");
+
+  function guardarInfo(e) {
+    e.preventDefault()
+  }
+
+  const dataContact = {
+    name: name,
+    phone: phone,
+    email: email,
+    address: address
+  }
+
+
   return (
     <>
       <div className="container">
